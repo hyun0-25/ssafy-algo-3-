@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class _1941_소문난칠공주 {
+public class BJ_1941_소문난칠공주 {
 
 	public static char[][] arr = new char[5][5]; // 5x5 배열
 	public static int[] picked = new int[7]; // 7명 뽑기

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class _16918_봄버맨 {
+public class BJ_16918_봄버맨 {
 
 	public static char[][] bombs;
 	public static int[][] bombtime;

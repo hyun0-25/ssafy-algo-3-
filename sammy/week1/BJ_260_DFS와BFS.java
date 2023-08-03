@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class _1260_DFS와BFS {
+public class BJ_260_DFS와BFS {
 	public static boolean[] visited;
 	public static ArrayList<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>();
 
