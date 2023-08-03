@@ -2,7 +2,7 @@ package study.week2;
 
 import java.util.Scanner;
 
-public class _15650_N과M_2 {
+public class BJ_15650_N과M_2 {
 	
 	public static int n,m;
 	

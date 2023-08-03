@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class _2178_미로탐색 {
+public class BJ_2178_미로탐색 {
 
 	public static int [][] graph;
 	public static int m;

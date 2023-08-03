@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class _15649_N과M_1 {
+public class BJ_15649_N과M_1 {
 	public static int[] arr;
 	public static boolean[] visited;
 	public static int n;
