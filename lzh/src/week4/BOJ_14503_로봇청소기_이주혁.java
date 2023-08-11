@@ -1,8 +1,9 @@
-package week4;
+package recursive;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 /**
  * 
@@ -32,11 +33,11 @@ import java.io.InputStreamReader;
  * @author SSAFY
  *
  */
-public class BOJ_14503_로봇청소기_이주혁 {
+public class 로봇 {
 
 	private static int N, M, d;
 	private static int[][] map;
-	private static int[][] deltas = {{-1, 0}, {0, 1}, {0, -1}, {1, 0}};
+	private static int[][] deltas = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 	public static class Robot {
 		
 		int row;
@@ -47,12 +48,10 @@ public class BOJ_14503_로봇청소기_이주혁 {
 		public Robot(int row, int col, int deltaIdx) {
 			this.row = row;
 			this.col = col;
-			this.delta = getDelta(deltaIdx);
+			this.deltaIdx = 3 - deltaIdx;
+			this.delta = deltas[3 - deltaIdx];
 		}
 		
-		public int[] getDelta(int deltaIdx) {
-			return deltas[deltaIdx];
-		}
 
 		public void goFront() {
 			this.row += delta[0];
@@ -68,7 +67,7 @@ public class BOJ_14503_로봇청소기_이주혁 {
 			int nr = this.row + delta[0];
 			int nc = this.col + delta[1];
 			
-			if(isInRange(nr, nc) && map[nr][nc] == 0) {
+			if(map[nr][nc] == 0) {
 				return true;
 			}
 			
@@ -76,18 +75,18 @@ public class BOJ_14503_로봇청소기_이주혁 {
 		}
 		
 		public boolean canGoBack() {
-			int nr = this.row + delta[0];
-			int nc = this.col + delta[1];
+			int nr = this.row - delta[0];
+			int nc = this.col - delta[1];
 			
-			if(!isInRange(nr, nc) || map[nr][nc] == 1) {
-				return false;
+			if(map[nr][nc] != 1) {
+				return true;
 			}
-			return true;
+			return false;
 		}
 		
 		public void turnCounterClock() {
-			deltaIdx = (deltaIdx-1)%4;
-			this.delta = getDelta(deltaIdx);
+			deltaIdx = (deltaIdx+1)%4;
+			this.delta = deltas[deltaIdx];
 		}
 		
 		
@@ -97,7 +96,7 @@ public class BOJ_14503_로봇청소기_이주혁 {
 				int nr = this.row + d[0];
 				int nc = this.col + d[1];
 				
-				if(isInRange(nr, nc) && map[nr][nc] == 0) {
+				if(map[nr][nc] == 0) {
 					return true;
 				}
 			}
@@ -105,8 +104,11 @@ public class BOJ_14503_로봇청소기_이주혁 {
 			return false;
 		}
 		
-		private boolean isInRange(int row, int col) {
-			return row >=0 && row < N && col >= 0 && col < M;
+		public void goToClean() {
+			do {
+				turnCounterClock();
+			} while(!canGoFront());
+			goFront();
 		}
 		
 	}
@@ -136,25 +138,22 @@ public class BOJ_14503_로봇청소기_이주혁 {
 		int ans = 0;
 		
 		while(true) {
-			
 			if(map[robot.row][robot.col] == 0) {
 				ans++;
 				map[robot.row][robot.col] = 2;
 			}
 			
 			if(robot.searchDirty() == true) {
-				while(!robot.canGoFront()) {
-					robot.turnCounterClock();
-				}
-				robot.goFront();
-			} else if(robot.canGoBack()){
+				robot.goToClean();
+			}
+			else if(robot.canGoBack()){
 				robot.goBack();
-			} else {
+			} 
+			else {
 				System.out.println(ans);
 				return;
 			}
 		}
 		
 	}
-
 }
